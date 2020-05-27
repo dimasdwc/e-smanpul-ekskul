@@ -9,12 +9,13 @@ Deskripsi Penilaian
 @endsection
 
 @section('content')
-<table class="table" id="table-ekskul">
+<div class="container">
+	<table class="table" id="table-ekskul">
 	<thead class="text-primary">
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">Nama Ekskul</th>
-			<th scope="col">Tempat Latihan</th>
+			<th scope="col">Deskripsi</th>
 			<th scope="col">Aksi</th>
 		</tr>      			
 	</thead>
@@ -22,10 +23,12 @@ Deskripsi Penilaian
 		@foreach ($deskripsi_nilai as $deskripsi_nilai)
 		<tr>
 			<td scope="row">{{ $loop->iteration }} </td>
-			<td>{{ $deskripsi_nilai-> id_ekskul}} </td>
-			<td>{{ $deskripsi_nilai-> deskripsi}} </td>	      	
+			<td>{{ $deskripsi_nilai->id_ekskul}} </td>
+			<td>{{ $deskripsi_nilai->deskripsi}} </td>	      	
 		</tr>
 		@endforeach
 	</tbody>
 </table>
+</div>
+
 @endsection

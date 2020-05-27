@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username', 'no_telepon', 'jenis_kelamin', 'jabatan', 'status'
     ];
 
     /**
@@ -36,4 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function detail_pelatih()
+    {
+    //setiap detail_pelatih dimiliki oleh user
+    return $this->hasOne('App\Models\DetailPelatih', 'pelatih_id');
+    }
 }

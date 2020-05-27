@@ -1,0 +1,11 @@
+{{ Form::open([ 'method' => 'delete', 'route' => ['jobs.destroy', $job->id ], 'onsubmit' => 'return ConfirmDelete()']) }}
+{{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+{{ Form::close() }}
+
+Then in some Jscript
+
+<script>
+function ConfirmDelete(){
+return confirm('Are you sure?');
+}
+</script>

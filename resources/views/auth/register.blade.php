@@ -40,6 +40,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
+
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -60,6 +74,17 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
+                        {{-- <div class="form-group row">                           
+                            <label for="ekskul" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ekskul') }}</label>
+                            <div class="col-md-6">
+                                <select name="ekskul" class="form-control" id="exampleFormControlSelect1">
+                                    @foreach ($data_ekskul as $ekskul)
+                                        <option value="{{$ekskul->id}}"> {{$ekskul->nama_ekskul}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div> --}}
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

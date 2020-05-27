@@ -10,9 +10,9 @@ class PenggunaController extends Controller
 {
     public function index() 
     {
-    	$pengguna = DB::table('pengguna')->get();
+    	$users = DB::table('login_user')->get();
 
-    	return view ('pengguna', ['pengguna' => $pengguna]);
+    	return view ('user/index', ['users' => $users]);
     	// return datatables::of(pengguna::query())->make(true);
     }
 }
