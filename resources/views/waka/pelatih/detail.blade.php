@@ -80,17 +80,68 @@
 	      	<hr>
 		       <div class="button-container">
 		          <button type="submit" class="btn btn-primary btn-round">Update Data</button>	        
-		       	
 		       </div>        
 	      </div>
 	  </div>
 	</div>
-</div>  
+</div> 
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+	        <h5 class="card-title">Tabel Riwayat Absensi</h5>
+	        <p class="card-category">Disini anda bisa melihat semua daftar absensi yang telah dilakukan sebelumnya</p>
+      	</div>
+    	<div class="card-body">        
+    		<div class="table-responsive-lg"> 
+	        	<table class="table table-hover" id="tabel_absensi_pelatih">		
+					<thead>
+						<tr>				    						 
+							<th scope="col">No</th>
+							<th scope="col">Tanggal</th>
+							<th scope="col">Jam Masuk</th>
+							<th scope="col">Jam Keluar</th>
+							<th scope="col">Catatan</th>						
+						</tr>     						
+					</thead>		
+				</table>  	
+    		</div>
+    	</div>
+   	</div>	
+</div> 
+<input type="hidden" id="pelatih_id" value="{{$pelatih->id}}">
   		
 @endsection
 
 @section('customJS')
 <script type="text/javascript">
 $("#pelatih").addClass('active ');
+	
+	var pelatih_id = $('#pelatih_id').val();
+	// alert(pelatih_id);
+
+	$("#absensi_pelatih").addClass('active ');
+	$(document).ready(function(){
+		$('#tabel_absensi_pelatih').DataTable({
+
+			processing: true,
+			serverSide: true,
+			responsive: true,
+			searching: true,
+			order:[
+				[1,'desc']
+			],
+
+			{{-- ajax:"{{ url('pelatih/getpenilaian_anggota') }}"+"/"+siswa_id, --}}
+			ajax:"{{ url('waka/waka_get_absensi_pelatih') }}"+"/"+pelatih_id,
+			columns:[			
+				{data:'DT_RowIndex', name:'id', orderable:false, width:'1%', className:'text-center'},	
+				{data:'tanggal',name: 'tanggal'},
+				{data:'jam_masuk',name: 'jam_masuk', orderable:false,},			
+				{data:'jam_keluar',name: 'jam_keluar', orderable:false,},			
+				{data:'catatan',name: 'catatan', orderable:false,},			
+			]
+		});
+	});
 </script>
 @endsection

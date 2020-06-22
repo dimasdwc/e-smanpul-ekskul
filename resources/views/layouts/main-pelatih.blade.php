@@ -94,7 +94,7 @@
           <li id="penilaian">
             <a href="{{ url('/pelatih/penilaian') }}">
               <i class="nc-icon nc-ruler-pencil"></i>
-              <p>Data Penilaian</p>
+              <p>Penilaian Raport</p>
             </a>
           </li>
           

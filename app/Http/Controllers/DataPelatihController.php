@@ -36,15 +36,12 @@ class DataPelatihController extends Controller
 		   	} else {
 		   		return "<span class='badge badge-pill badge-danger'>$status</span>";
 		  	}
-            // return '
-            // 	<h6><span class="badge badge-pill badge-success">'.$status.'</span></h6>
-            // ';
         })
         ->addColumn('aksi', function($d){
             $link = url('/waka/pelatih/'.$d->id.'/detail');	
             return '
             <a href='.$link.'>
-            <button type="submit" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Lihat Detail">
+            <button type="submit" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Lihat Detail">
                 Lihat
             </button>
             ';            
@@ -86,5 +83,13 @@ class DataPelatihController extends Controller
     	$anggota = EkskulAnggota::where('pelatih_id', $id)->count();
     	$pelatih = User::with('detail_pelatih')->where('id', $id)->first();
     	return view('waka/pelatih/detail', compact('pelatih','pertemuan','anggota'));
+    }
+
+    public function getAbsenPelatih($id)
+    {    
+        $dataAbsensi = AbsensiPelatih::where('pelatih_id', $id)->get();
+        return DataTables::of($dataAbsensi)
+            ->addIndexColumn()
+            ->toJson();     
     }
 }

@@ -14,44 +14,89 @@ Daftar Ekskul | E-Smanpul
 	@endif
 </div>
 
-
 <div class="col-md-12">
- 	<div class="card">
-		<div class="card-header">	      	
-      		<div class="row">
-                <div class="col-lg-9 ml-auto mr-auto text-left ">
-	      			<h4 class="card-title">Daftar Ekstrakurikuler</h4>
-	      			<p class="card-category">
-						Berikut adalah tabel data yang berisi daftar semua ekstrakurikuler aktif dan tidak aktif<br>Anda bisa menambahkan data baru dengan mengklik tombol "Tambah Ekskul Baru"
-					</p>
-	      		</div>
-	      		<div class="col-md-3 ml-auto mr-auto text-right">
-	      			<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#daftarEkskul">
-			  			Tambah Ekskul Baru
-					</button>
-	      		</div>
-      		</div>
-		</div>
-		<div class="card-body">
-			<div class="table-responsive"> 
-				<table class="table table-hover" id="tabel_daftar_ekskul">
-					<thead>
-						<tr>				    						 
-							<th scope="col">No</th>
-							<th scope="col">Nama Ekskul</th>
-							<th scope="col">Rumpun</th>
-							<th scope="col">Pembina</th>
-							{{-- <th scope="col">Pelatih</th> --}}
-							<th scope="col">Status</th>						
-							<th scope="col">Aksi</th>
-						</tr>     						
-					</thead>
-				</table>  			
+	<div class="card">
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="card-header">	      			         
+	      			<h4 class="card-title">Daftar Ekstrakurikuler</h4>	      			
+				</div>
 			</div>
+			<div class="col-md-7">
+				<ul class="nav nav-tabs" role="tablist">
+				    <li class="nav-item">
+				      <a class="nav-link active" data-toggle="tab" href="#home">Rumpun</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" data-toggle="tab" href="#menu2">Semua Ekskul</a>
+				    </li>
+		  		</ul>
+			</div>
+		</div>
+
+  		<!-- Tab panes -->
+		<div class="tab-content">
+		    <div id="home" class="container tab-pane active"><br>
+				<div class="card-body">
+					<div class="table-responsive-lg"> 
+						<table class="table table-hover" id="tabel_daftar_ekskul_rumpun">
+							<thead>
+								<tr>				    						 
+									<th scope="col">No</th>
+									<th scope="col">Nama Rumpun</th>
+									<th scope="col">Aksi</th>
+								</tr>     						
+							</thead>
+						</table>  			
+					</div>
+				</div>
+		    </div>
+
+		   {{--  <div id="menu1" class="container tab-pane fade"><br>
+			    <h3>Menu 1</h3>
+			    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		    </div> --}}
+
+		    <div id="menu2" class="container tab-pane fade"><br>
+				<div class="card-body">
+					<div class="row">
+		                <div class="col-lg-9">
+			      		</div>
+			      		<div class="col-md-3 ml-auto mr-auto text-right">
+			      			<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#daftarEkskul">
+					  			Tambah Ekskul Baru
+							</button>
+			      		</div>
+		      		</div>
+		      		<div class="row">
+		      			<div class="col-md-12">
+							<div class="table-responsive-lg"> 
+								<table class="table table-hover" style="width: 100%" id="tabel_daftar_ekskul">
+									<thead>
+										<tr>				    						 
+											<th scope="col">No</th>
+											<th scope="col">Nama Ekskul</th>
+											<th scope="col">Pembina</th>
+											<th scope="col">Tempat Latihan</th>
+											<th scope="col">Status</th>						
+											<th scope="col">Aksi</th>
+										</tr>     						
+									</thead>
+								</table>  			
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 </div>
 
+
+<!-- Modal -->
 <div class="modal fade" id="daftarEkskul" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog" role="document">
     	<div class="modal-content">
@@ -148,22 +193,33 @@ Daftar Ekskul | E-Smanpul
 			responsive: true,
 			searching: true,
 
+			language:{
+				url : "{{ asset('indonesia.json') }}",
+			},
+
 			ajax:"{{ route('waka_get_data_ekskul') }}",
 			columns:[	
 				{data:'no_ekskul', name:'no_ekskul', orderable:false, width:'1%', className:'text-center'},
 				{data:'nama_ekskul', name:'nama_ekskul'},
-				{data:'rumpun', name:'rumpun'},
+				// {data:'rumpun', name:'rumpun'},
 				{data:'nama_pembina', name:'nama_pembina'},
-				// {data:'nama_pelatih', name:'nama_pelatih'},
+				{data:'tempat_latihan', name:'tempat_latihan'},
 				{data:'status', name:'status', className:'text-center'},
 				{data:'aksi', name:'aksi', orderable:false, className:'text-center'},						
 			]});
-	});   
-</script>
-@endsection
 
-@section('customJS')
-<script type="text/javascript">
-	$("#utama").addClass('active');  
+		$('#tabel_daftar_ekskul_rumpun').DataTable({		
+			processing: true,
+			serverSide: true,
+			responsive: true,
+			searching: true,
+
+			ajax:"{{ route('waka_get_data_ekskul_rumpun') }}",
+			columns:[	
+				{data:'DT_RowIndex', name:'DT_RowIndex', orderable:false, width:'1%', className:'text-center'},
+				{data:'nama_rumpun', name:'nama_rumpun'},
+				{data:'aksi', name:'aksi', orderable:false, className:'text-center'},						
+			]});
+	});   
 </script>
 @endsection

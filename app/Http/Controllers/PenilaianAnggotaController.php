@@ -24,7 +24,8 @@ class PenilaianAnggotaController extends Controller
   
 	public function index()
 	{
-		return view('pelatih/penilaian/index');
+    $tahun_ajaran = TahunAjaran::where('status', 1)->first();
+		return view('pelatih/penilaian/index', compact('tahun_ajaran'));
 	}
 
   	public function get_penilaian_anggota()
@@ -63,7 +64,7 @@ class PenilaianAnggotaController extends Controller
 	    $data_pelatih = Auth::user();
 	   	$data_anggota = EkskulAnggota::with('siswa_ekskul')->where('siswa_id', $id)->first();  
 	    $data_ekskul = DetailPelatih::with('ekskul')->where('pelatih_id', $data_pelatih->id)->first();
-	    $tahun_ajaran = TahunAjaran::where('status', 'Aktif')->first();
+	    $tahun_ajaran = TahunAjaran::where('status', 1)->first();
 	    $data_deskripsi = PenilaianDeskripsi::where('ekskul_id', $data_ekskul->ekskul_id)->get();
 	    $data_predikat = Predikat::get();
 
@@ -82,7 +83,7 @@ class PenilaianAnggotaController extends Controller
       	// $data_anggota = EkskulAnggota::with('siswa_ekskul')->where('siswa_id', $id)->first();             
       	$data_ekskul = DetailPelatih::with('ekskul')->where('pelatih_id', $data_pelatih->id)->first();
         $data_ekskul->ekskul->id;
-     	  $tahun_ajaran = TahunAjaran::where('status', 'Aktif')->first();
+     	  $tahun_ajaran = TahunAjaran::where('status', 1)->first();
       	$penilaian_anggota = new PenilaianAnggota;
       	// return$request->all();
       	$penilaian_anggota->create([          

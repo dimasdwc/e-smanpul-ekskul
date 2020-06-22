@@ -23,12 +23,15 @@
 
   <!-- CSS Files -->
   <link href="{{ asset('paper/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+  {{-- <link href="{{ asset('paper/assets/css/bootstrap.css.map') }}" rel="stylesheet" /> --}}
   <link href="{{ asset('paper/assets/css/paper-dashboard.css?v=2.0.0') }}" rel="stylesheet" />  
   {{-- <link href="{{ asset('paper/assets/css/paper-dashboard.css') }}" rel="stylesheet" />   --}}
-  <link href="{{ asset('font-awesome/css/fontawesome.min.css') }}" rel="stylesheet">
+  {{-- <link href="{{ asset('font-awesome/css/fontawesome.min.css') }}" rel="stylesheet"> --}}
 
   <!-- Datatables -->
-  <link rel="stylesheet" href=" {{ asset('datatables/css/jquery.dataTables.min.css') }} "> 
+  {{-- <link rel="stylesheet" href=" {{ asset('datatables/css/jquery.dataTables.min.css') }} ">  --}}
+  <link rel="stylesheet" href=" {{ asset('DataTables-Bootstrap4/datatables.min.css') }} "> 
+  {{-- <link rel="stylesheet" href=" {{ asset('DataTables-Bootstrap4/Responsive-2.2.5/css/responsive.bootstrap4.min.css') }} ">  --}}
 
   <!-- Perfect Scrollbar -->
   <link rel="stylesheet" href=" {{ asset('css/perfect-scrollbar.css') }} ">
@@ -52,28 +55,28 @@
         <li id="utama">
             <a href="{{ url('/waka') }}">
               <i class="nc-icon nc-chart-pie-36 "></i>
-              <p>Utama</p>
+              <p>Dashboard</p>
             </a>
           </li>
 
           <li id="siswa">
             <a href="{{ url('/waka/siswa') }}">
               <i class="nc-icon nc-badge"></i>
-              <p>Data Siswa</p>
+              <p>Peserta Didik</p>
+            </a>
+          </li>
+
+          <li id="tahun-ajaran">
+            <a href="{{ url('/waka/tahun-ajaran') }}">
+              <i class="nc-icon nc-badge"></i>
+              <p>Tahun Ajaran</p>
             </a>
           </li>
 
           <li id="daftar_ekskul">
             <a href="{{ url('/waka/ekskul') }}">
               <i class="nc-icon nc-single-copy-04"></i>
-              <p>Data Ekskul</p>
-            </a>
-          </li>
-
-          <li id="pelatih">
-            <a href="{{ url('/waka/pelatih') }}">
-              <i class="nc-icon nc-tile-56"></i>
-              <p>Data Pelatih</p>
+              <p>Ektrakurikuler</p>
             </a>
           </li>
 
@@ -83,25 +86,20 @@
               <p>Data Pembina</p>
             </a>
           </li>
-          <!--  <li id="absensi" >
-            <a href="{{ url('/') }}">
-              <i class="nc-icon nc-book-bookmark"></i>
-              <p>Data Absensi Pelatih</p>
+
+          <li id="pelatih">
+            <a href="{{ url('/waka/pelatih') }}">
+              <i class="nc-icon nc-tile-56"></i>
+              <p>Data Pelatih</p>
             </a>
-          </li>   -->
-          <!-- <li id="absensi" >
-            <a href="{{ url('/') }}">
-              <i class="nc-icon nc-book-bookmark"></i>
-              <p>Data Absensi Siswa</p>
-            </a>
-          </li>  -->
+          </li>
           
-          <li id="nilai_siswa">
+          {{-- <li id="nilai_siswa">
             <a href="{{ url('/waka/penilaian') }}">
               <i class="nc-icon nc-ruler-pencil"></i>
               <p>Penilaian Siswa</p>
             </a>
-          </li>
+          </li> --}}
           <li id="pengguna">
             <a href="{{ url('/pelatih') }}">
               <i class="nc-icon nc-calendar-60"></i>
@@ -180,7 +178,11 @@
   {{-- <script src="{{ asset('paper/assets/js/plugins/bootstrap-notify.js') }}"></script> --}}
   
   <!-- Datatables -->
-  <script src=" {{ asset('datatables/js/jquery.dataTables.min.js') }} "></script>
+  <script src=" {{ asset('DataTables-Bootstrap4/Responsive-2.2.5/js/responsive.bootstrap4.min.js') }} "></script>
+  <script src=" {{ asset('DataTables-Bootstrap4/DataTables-1.10.21/js/jquery.dataTables.min.js') }} "></script>
+  <script src=" {{ asset('DataTables-Bootstrap4/DataTables-1.10.21/js/dataTables.bootstrap4.min.js') }} "></script>
+  {{-- <script src=" {{ asset('DataTables-Bootstrap4/datatables.min.js') }} "></script> --}}
+  {{-- <script src=" {{ asset('datatables/js/jquery.dataTables.min.js') }} "></script> --}}
   
   <!-- Select2 -->
   <script src="{{ asset('select2/js/select2.min.js') }}"></script>

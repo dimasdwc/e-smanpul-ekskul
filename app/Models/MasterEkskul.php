@@ -11,7 +11,7 @@ class MasterEkskul extends Model
    
    public function pelatih()
    {
-   	return $this->hasMany('App\Models\DetailPelatih', 'pelatih_id');
+   	return $this->hasOne('App\Models\DetailPelatih', 'ekskul_id');
    }
 
    public function ekskulrumpun()

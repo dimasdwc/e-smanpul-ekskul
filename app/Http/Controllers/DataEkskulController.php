@@ -8,6 +8,9 @@ use App\Models\MasterEkskul;
 use App\Models\MasterPembina;
 use App\Models\DetailPelatih;
 use App\Models\EkskulRumpun;
+use App\Models\AbsensiPelatih;
+use App\Models\AbsensiSiswa;
+use App\Models\EkskulAnggota;
 use App\User;
 
 class DataEkskulController extends Controller
@@ -46,27 +49,39 @@ class DataEkskulController extends Controller
         })
         ->addColumn('status', function($d){                            
             $status = $d->status;
-
-			// if ($status == "Aktif") {
-		   	// 	<span class="badge badge-pill badge-success">'.$status.'</span>
-		   	// } else {
-		   	// <span class="badge badge-pill badge-danger">'.$status.'</span>
-		  	// }
             return '
             	<h6><span class="badge badge-pill badge-success">'.$status.'</span></h6>
             ';
         })
         ->addColumn('aksi', function($d){
-            $link = url('/siswa/'.$d->id.'/hapus');
+            $link = url('/waka/ekskul/'.$d->id.'/detail'); 
             return '
-            <button type="submit" class="btn btn-neutral btn-icon btn-round text-info" data-toggle="tooltip" data-placement="top" title="Lihat Detail">
-                <i class="nc-icon nc-alert-circle-i"></i>
+            <a href='.$link.'>
+            <button type="submit" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Lihat Detail">
+                Lihat
             </button>
-            ';            
+            ';           
         })
         ->rawColumns(['rumpun','nama_pelatih','nama_pembina','status','aksi'])
 		->toJson();
+    }
 
+    public function tabel_tampil_ekskul_rumpun()
+    {
+        $data_rumpun = EkskulRumpun::all();
+        return DataTables::of($data_rumpun)       
+        ->addColumn('aksi', function($d){
+            $link = url('/waka/pelatih/'.$d->id.'/detail'); 
+            return '
+            <a href='.$link.'>
+            <button type="submit" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Lihat Detail">
+                Lihat
+            </button>
+            ';           
+        })
+        ->addIndexColumn()
+        ->rawColumns(['aksi'])
+        ->toJson();
     }
 
     public function showRumpun()
@@ -77,10 +92,14 @@ class DataEkskulController extends Controller
 
     public function detail($id)
     {
-        $ekskul = Ekskul::find($id);
-        $jumlah_anggota = AbsensiSiswa::count(); 
-        $jumlah_pertemuan = AbsensiPelatih::count(); 
-        return view('ekskul/detail', ['ekskul' => $ekskul, 'jumlah_anggota' => $jumlah_anggota]);        
+        $data_ekskul = MasterEkskul::with('pelatih')->where('id', $id)->first();
+        $pelatih_id = $data_ekskul->pelatih->pelatih_id;
+        $data_pelatih = User::where('id', $pelatih_id);
+        $jumlah_anggota = EkskulAnggota::where('ekskul_id', $id)
+                ->where('status', 1)
+                ->count();
+        $jumlah_pertemuan = AbsensiPelatih::where('pelatih_id', $pelatih_id)->count();
+        return view('waka/ekskul/detail', compact('data_pelatih','jumlah_anggota', 'jumlah_pertemuan'));  
     }
 
     public function tambah(Request $request)

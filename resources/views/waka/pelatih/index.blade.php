@@ -19,7 +19,7 @@ Data Pelatih | E-Smanpul
  	<div class="card">
 		<div class="card-header">	      	
       		<div class="row">
-                <div class="col-lg-9 ml-auto mr-auto text-left ">
+                <div class="col-xl-9 ml-auto mr-auto text-left ">
 	      			<h4 class="card-title">Daftar Pelatih Ekskul</h4>
 	      			<p class="card-category">
 						Berikut adalah tabel data yang berisi daftar semua pelatih ekstrakurikuler aktif dan tidak aktif<br>Anda bisa menambahkan data baru dengan mengklik tombol "Tambah Pelatih Baru"
@@ -33,8 +33,8 @@ Data Pelatih | E-Smanpul
       		</div>
 		</div>
 		<div class="card-body">
-			<div class="table-responsive"> 
-				<table class="table table-hover " id="tabel_daftar_pelatih">
+			<div class="table-responsive-lg table-full-width"> 
+				<table class="table table-shopping" id="tabel_daftar_pelatih">
 					<thead>
 						<tr>				    						 
 							<th scope="col">No</th>
@@ -129,8 +129,12 @@ Data Pelatih | E-Smanpul
 		$('#tabel_daftar_pelatih').DataTable({		
 			processing: true,
 			serverSide: true,
-			responsive: true,
+			responsive: false,
 			searching: true,
+
+			language:{
+				url : "{{ asset('indonesia.json') }}",
+			},
 
 			ajax:"{{ route('waka_get_data_pelatih') }}",
 			columns:[	

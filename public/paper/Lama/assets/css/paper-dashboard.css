@@ -4458,7 +4458,7 @@ License - nucleoapp.com/license/
   font-weight: 700;
   padding-bottom: 0;
   text-transform: uppercase;
-  border: 0;
+  /*border: 0;*/
 }
 
 .table .radio,

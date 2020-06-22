@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MasterPembina extends Model
 {
     protected $table = 'master_pembina';
-    protected $fillable = ['nip','nama_pembina', 'jabatan'];
+    protected $fillable = ['nama_pembina', 'jabatan', 'jenis_kelamin', 'no_telepon'];
 
     public function ekskul_pembina()
    	{

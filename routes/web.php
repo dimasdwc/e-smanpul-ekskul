@@ -16,7 +16,7 @@ Route::get('/', function () {
 // Route::get('/data-siswa', 'DataSiswaController@dataSiswa');
 // Route::get('get_absen_pelatih', 'DaftarEkskulController@getAbsenPelatih')-> name('get_absen_pelatih'); 
 // Route::get('get_absen_siswa', 'DaftarEkskulController@getAbsenSiswa')-> name('get_absen_siswa'); 
-Route::get('get_data_siswa', 'DataSiswaController@getDataSiswa')-> name('get_data_siswa'); 
+
 Route::get('/pelatih/{id}/detail', 'PelatihController@detail');
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -29,28 +29,36 @@ Route::group(['prefix' => 'waka', 'middleware' => ['auth', 'role']], function()
 	Route::get('/', 'WakaController@index');
 	Route::get('/profil', 'WakaController@profil');
 
-	/* Route Waka- Data Siswa */
+	/* Route Waka- Peserta Didik */
 	Route::get('/siswa', 'DataSiswaController@index');
-	Route::get('/deskripsi', 'DeskripsiPenilaianController@index');
-	Route::get('/siswa/{id}/ubah', 'DataSiswaController@ubah');	
 	Route::post('/siswa/tambah', 'DataSiswaController@tambah');
+	Route::get('/siswa/{id}/ubah', 'DataSiswaController@ubah');	
 	Route::get('/siswa/{id}/hapus', 'DataSiswaController@hapus');
+	Route::get('get_data_siswa', 'DataSiswaController@getDataSiswa')-> name('get_data_siswa'); 
+
+	/* Route Waka- Tahun Ajaran */
+	Route::get('/tahun-ajaran', 'TahunAjaranController@index');
+	Route::get('waka_get_data_tahun_ajaran', 'TahunAjaranController@getDataTahunAjaran')-> name('waka_get_data_tahun_ajaran'); 
+	
 
 	/* Route Waka- Data Ekskul */
 	Route::get('/ekskul', 'DataEkskulController@index');
 	Route::post('/tambah-ekskul', 'DataEkskulController@tambah');
 	Route::get('waka_get_data_ekskul', 'DataEkskulController@tabel_tampil_ekskul')-> name('waka_get_data_ekskul'); 
+	Route::get('waka_get_data_ekskul_rumpun', 'DataEkskulController@tabel_tampil_ekskul_rumpun')-> name('waka_get_data_ekskul_rumpun'); 
 	Route::get('/ekskul/rumpun', 'DataEkskulController@showRumpun');
-	Route::get('/ekskul/{id}/detail', 'DataEkskulController@detail');      
+	Route::get('/ekskul/{id}/detail', 'DataEkskulController@detail');    
 
 	/* Route Waka- Data pelatih */
 	Route::get('/pelatih', 'DataPelatihController@index');
 	Route::post('/tambah-pelatih', 'DataPelatihController@tambah');
 	Route::get('/pelatih/{id}/detail', 'DataPelatihController@detail');
 	Route::get('waka_get_data_pelatih','DataPelatihController@get_data_pelatih')->name('waka_get_data_pelatih');
+	Route::get('waka_get_absensi_pelatih/{id}', 'DataPelatihController@getAbsenPelatih');
 
 	/* Route Waka- Data Pembina */
 	Route::get('/pembina', 'DataPembinaController@index');
+	Route::get('waka_get_data_pembina', 'DataPembinaController@getDataPembina')-> name('waka_get_data_pembina'); 
 
 	/* Route Waka- Data Penilaian siswa */
 	Route::get('/penilaian-siswa', 'DataPenilaianSiswaController@index');

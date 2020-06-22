@@ -19,7 +19,7 @@ class DataSiswaController extends Controller
     public function index()
     {   
         $data_siswa = MasterSiswa::all();
-        return view('siswa/index', ['data_siswa' => $data_siswa]);                
+        return view('waka/siswa/index', ['data_siswa' => $data_siswa]);                
     }
 
     public function getDataSiswa()
@@ -51,7 +51,7 @@ class DataSiswaController extends Controller
     public function ubah($id)
     {
         $siswa  = MasterSiswa::find($id);
-        return view('siswa/ubah', ['siswa' => $siswa]);
+        return view('waka/siswa/ubah', ['siswa' => $siswa]);
     }  
 
     public function update(Request $request, $id)
